@@ -7,4 +7,4 @@
 ./client <pid> <string>  // The command to send a string from the client to the server..
 ```
 
-![cover-minitalk](https://github.com/user-attachments/assets/3bdacc8e-0507-470f-a466-fe6c054ea81b)
+![cover-minitalk-bonus](https://github.com/user-attachments/assets/ae75c3d9-0d6b-48bc-9ee5-0d6d3ccdb3c0)
