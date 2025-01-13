@@ -6,13 +6,11 @@
 /*   By: ysumeral <ysumeral@student.42istanbul.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/05 01:12:42 by ysumeral          #+#    #+#             */
-/*   Updated: 2025/01/05 15:46:29 by ysumeral         ###   ########.fr       */
+/*   Updated: 2025/01/12 17:32:49 by ysumeral         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <unistd.h>
-#include <signal.h>
-#include "../ft_printf/ft_printf.h"
+#include "./minitalk.h"
 
 static int	ft_atoi(char *str)
 {

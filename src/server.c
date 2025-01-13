@@ -6,13 +6,11 @@
 /*   By: ysumeral <ysumeral@student.42istanbul.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/05 01:09:00 by ysumeral          #+#    #+#             */
-/*   Updated: 2025/01/05 16:46:23 by ysumeral         ###   ########.fr       */
+/*   Updated: 2025/01/12 17:32:48 by ysumeral         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <unistd.h>
-#include <signal.h>
-#include "../ft_printf/ft_printf.h"
+#include "./minitalk.h"
 
 static void	signal_handler(int signal)
 {
@@ -24,9 +22,10 @@ static void	signal_handler(int signal)
 	bit_position++;
 	if (bit_position == 8)
 	{
-		ft_printf("%c", (char)received_char);
 		if (received_char == 0)
 			ft_printf("- Invalid character!");
+		else
+			write(1, &received_char, 1);
 		received_char = 0;
 		bit_position = 0;
 	}
