@@ -1,3 +1,15 @@
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    Makefile                                           :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: ysumeral <ysumeral@student.42istanbul.c    +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2025/01/12 17:18:37 by ysumeral          #+#    #+#              #
+#    Updated: 2025/01/12 17:53:36 by ysumeral         ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
+
 NAME = minitalk
 SERVER = server
 CLIENT = client
@@ -9,9 +21,9 @@ PRINTF_LIB = ./ft_printf/libftprintf.a
 $(NAME): all
 
 all:
-	@make -s -C ./ft_printf
-	@$(CC) $(CFLAGS) $(PRINTF_LIB) src/server.c -o $(SERVER)
-	@$(CC) $(CFLAGS) $(PRINTF_LIB) src/client.c -o $(CLIENT)
+	make -C ./ft_printf
+	$(CC) $(CFLAGS) ./src/server.c $(PRINTF_LIB) -o $(SERVER)
+	$(CC) $(CFLAGS) ./src/client.c $(PRINTF_LIB) -o $(CLIENT)
 	@echo ---------------------------
 	@echo
 	@echo " -- MANDATORY PART --"
@@ -21,18 +33,18 @@ all:
 	@echo ---------------------------
 
 clean:
-	@make clean -s -C ./ft_printf
+	make clean -C ./ft_printf
 
-fclean: clean
-	@make fclean -s -C ./ft_printf
-	@$(RM) $(SERVER) $(CLIENT)
+fclean:
+	make fclean -C ./ft_printf
+	$(RM) $(SERVER) $(CLIENT)
 
 re: fclean all
 
 bonus: fclean
-	@make -s -C ./ft_printf
-	@$(CC) $(CFLAGS) $(PRINTF_LIB) bonus_src/server_bonus.c -o $(SERVER)
-	@$(CC) $(CFLAGS) $(PRINTF_LIB) bonus_src/client_bonus.c -o $(CLIENT)
+	make -C ./ft_printf
+	$(CC) $(CFLAGS) ./bonus_src/server_bonus.c $(PRINTF_LIB) -o $(SERVER)
+	$(CC) $(CFLAGS) ./bonus_src/client_bonus.c $(PRINTF_LIB) -o $(CLIENT)
 	@echo ---------------------------
 	@echo
 	@echo " -- BONUS PART --"
