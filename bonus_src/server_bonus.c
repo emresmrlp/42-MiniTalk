@@ -6,13 +6,11 @@
 /*   By: ysumeral <ysumeral@student.42istanbul.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/05 01:09:00 by ysumeral          #+#    #+#             */
-/*   Updated: 2025/01/05 17:07:51 by ysumeral         ###   ########.fr       */
+/*   Updated: 2025/01/12 17:32:50 by ysumeral         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <unistd.h>
-#include <signal.h>
-#include "../ft_printf/ft_printf.h"
+#include "./minitalk_bonus.h"
 
 static void	signal_handler(int signal, siginfo_t *info, void *parameter)
 {
@@ -21,29 +19,31 @@ static void	signal_handler(int signal, siginfo_t *info, void *parameter)
 
 	(void) parameter;
 	if (signal == SIGUSR2)
+	{
 		received_char |= 1 << bit_position;
+		kill(info->si_pid, SIGUSR2);
+	}
+	else
+		kill(info->si_pid, SIGUSR1);
 	bit_position++;
 	if (bit_position == 8)
 	{
-		ft_printf("%c", (char)received_char);
 		if (received_char == 0)
 			ft_printf("- Invalid character!");
+		else
+			write(1, &received_char, 1);
 		received_char = 0;
 		bit_position = 0;
 	}
-	if (signal == SIGUSR2)
-		kill(info->si_pid, SIGUSR2);
-	else if (signal == SIGUSR1)
-		kill(info->si_pid, SIGUSR1);
 }
 
 int	main(void)
 {
 	struct sigaction	sa;
 
+	sigemptyset(&sa.sa_mask);
 	sa.sa_sigaction = &signal_handler;
 	sa.sa_flags = SA_SIGINFO;
-	sigemptyset(&sa.sa_mask);
 	ft_printf("---------------------------\n");
 	ft_printf("\n");
 	ft_printf("( BONUS ) SERVER STARTED!\n");

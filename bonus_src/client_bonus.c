@@ -6,13 +6,11 @@
 /*   By: ysumeral <ysumeral@student.42istanbul.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/05 01:12:42 by ysumeral          #+#    #+#             */
-/*   Updated: 2025/01/05 17:15:57 by ysumeral         ###   ########.fr       */
+/*   Updated: 2025/01/12 17:32:57 by ysumeral         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <unistd.h>
-#include <signal.h>
-#include "../ft_printf/ft_printf.h"
+#include "./minitalk_bonus.h"
 
 static int	ft_atoi(char *str)
 {
@@ -44,7 +42,7 @@ static int	send_signal(pid_t pid, char *str)
 	{
 		while (i < 8)
 		{
-			if ((*str >> i) & 1)
+			if ((*str >> i++) & 1)
 			{
 				if (kill(pid, SIGUSR2) == -1)
 					return (-1);
@@ -54,7 +52,6 @@ static int	send_signal(pid_t pid, char *str)
 				if (kill(pid, SIGUSR1) == -1)
 					return (-1);
 			}
-			i++;
 			usleep(100);
 		}
 		i = 0;
@@ -65,8 +62,10 @@ static int	send_signal(pid_t pid, char *str)
 
 static void	confirmation_handler(int signal)
 {
-	if (signal == SIGUSR2 || signal == SIGUSR1)
-		ft_printf("+ Server: Message received! :))\n");
+	if (signal == SIGUSR2)
+		ft_printf("+ Server: Message received! (1)\n");
+	else if (signal == SIGUSR1)
+		ft_printf("+ Server: Message received! (0)\n");
 }
 
 int	main(int argc, char **argv)
