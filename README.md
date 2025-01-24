@@ -1,4 +1,4 @@
-# 42 Istanbul / MINITALK
+# 42 Türkiye / MINITALK
 
 - First, you need to run the server with the following command, and then run the client in a new terminal with the required arguments. This way, you can send a string to the server using Unix signals from the client!
 
